@@ -91,7 +91,7 @@ router.put('/:id', async (req, res) => {
 
 //! ########################## DELETE REQUESTS ##############################
 // delete a category by its `id` value but KEEP the product - DELETE request
-router.delete('/:id', (req, res) => {
+router.delete('/:id', async (req, res) => {
   try {
     const updatedProduct = await Product.update(
       { category_id: null },
