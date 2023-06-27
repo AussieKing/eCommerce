@@ -19,11 +19,11 @@ router.get("/", async (req, res) => {
 });
 
 // get ONE product
-router.get("/:id", async (req, res) => {
+router.get("/:product_id", async (req, res) => {
   // find a single product by its `id`
   // be sure to include its associated Category and Tag data
   try {
-    const productData = await Product.findByPk(req.params.id, {
+    const productData = await Product.findByPk(req.params.product_id, {
       include: [{ model: Category }, { model: Tag, through: ProductTag }],
     });
     if (!productData) {
@@ -73,11 +73,11 @@ router.post("/", async (req, res) => {
 
 //! ########################## UPDATE REQUESTS ##############################
 // update product
-router.put("/:id", async (req, res) => {
+router.put("/:product_id", async (req, res) => {
   // update product data
   Product.update(req.body, {
     where: {
-      id: req.params.id,
+      product_id: req.params.product_id,
     },
   })
     .then((product) => {
@@ -99,10 +99,10 @@ router.put("/:id", async (req, res) => {
           // figure out which ones to remove
           const productTagsToRemove = productTags
             .filter(({ tag_id }) => !req.body.tagIds.includes(tag_id))
-            .map(({ id }) => id);
+            .map(({ tag_id }) => tag_id);
           // run both actions
           return Promise.all([
-            ProductTag.destroy({ where: { id: productTagsToRemove } }),
+            ProductTag.destroy({ where: { tag_id: productTagsToRemove } }),
             ProductTag.bulkCreate(newProductTags),
           ]);
         });
@@ -117,11 +117,11 @@ router.put("/:id", async (req, res) => {
 });
 
 //! ########################## DELETE REQUESTS ##############################
-router.delete("/:id", async (req, res) => {
+router.delete("/:product_id", async (req, res) => {
   // delete one product by its `id` value
   try {
     const productData = await Product.destroy({
-      where: { id: req.params.id },
+      where: { product_id: req.params.product_id },
     });
     if (!productData) {
       res

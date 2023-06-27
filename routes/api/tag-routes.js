@@ -16,11 +16,11 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.get("/:id", async (req, res) => {
+router.get("/:tag_id", async (req, res) => {
   // find a SINGLE tag by its `id`
   // be sure to include its associated Product data
   try {
-    const tagData = await Tag.findByPk(req.params.id, {
+    const tagData = await Tag.findByPk(req.params.tag_id, {
       include: [{ model: Product, through: ProductTag }],
     });
     if (!tagData) {
@@ -42,7 +42,7 @@ router.post("/", async (req, res) => {
     if (req.body.productIds && req.body.productIds.length > 0) {
       const productTagIdArr = await Product.findAll({
         where: {
-          id: req.body.productIds,
+          product_id: req.body.productIds,
         },
       });
 
@@ -56,12 +56,12 @@ router.post("/", async (req, res) => {
 });
 
 //! ########################## UPDATE REQUESTS ##############################
-router.put("/:id", async (req, res) => {
+router.put("/:tag_id", async (req, res) => {
   // update a tag's name by its `id` value
   try {
     const tagData = await Tag.update(req.body, {
       where: {
-        id: req.params.id,
+        tag_id: req.params.tag_id,  //! potential issue HERE
       },
     });
 
@@ -78,7 +78,7 @@ router.put("/:id", async (req, res) => {
     }
 
     // link new tags with products
-    const updatedTag = await Tag.findByPk(req.params.id, {
+    const updatedTag = await Tag.findByPk(req.params.tag_id, {
       include: [{ model: Product, through: ProductTag }],
     });
 
@@ -89,13 +89,13 @@ router.put("/:id", async (req, res) => {
 });
 
 //! ########################## DELETE REQUESTS ##############################
-router.delete("/:id", async (req, res) => {
+router.delete("/:tag_id", async (req, res) => {
   // delete on tag by its `id` value
   try {
     // delete the tag
     const tagData = await Tag.destroy({
       where: {
-        id: req.params.id,
+        tag_id: req.params.tag_id,
       },
     });
 
