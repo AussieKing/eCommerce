@@ -67,7 +67,7 @@ router.put("/:category_id", async (req, res) => {
       return;
     }
     // update the category name
-    await Category.update(req.body); //! potential issue HERE
+    await categoryData.update(req.body);
     // update the products
     if (req.body.productIds && Array.isArray(req.body.productIds)) {
       await categoryData.setProducts(req.body.productIds);
