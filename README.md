@@ -31,21 +31,23 @@
   Prior to running the program, start the database by entering 'mysql -u root -p' in the terminal. Please note you will need to set up your own password/username in an .env file if you havent't done this before. After providing your password, type 'source schema.sql;' from the db folder, to create or reload the database.
 
   Now that the database is set up, return to the main folder and execute the command 'npm run seed' to populate the database with the initial dummy data for testing purposes.
-
-  You can now launch the application by running the command 'npm start' , or"nodemon server.js".
-
-
   
+![Screen Shot 2023-06-27 at 6 04 59 pm](https://github.com/AussieKing/eCommerce/assets/126050763/7e078ad3-3625-4eab-8401-fcc6815c2cd5)
+
+  You can now launch the application by running the command 'npm start' , or 'nodemon server.js'.
+
+![Screen Shot 2023-06-27 at 6 06 25 pm](https://github.com/AussieKing/eCommerce/assets/126050763/d9cc5a16-ca95-4d1c-88d4-45ce277c294c)
+
 
   Now that the application is talking to the local port, you can start debugging (I use Insomnia).
 
   With Insomnia, you can execute the application's creation routes and obtain the results in a JSON format.
   The screennshot below demonstrates how Insomnia should present information when a route is requested.
   
+![Screen Shot 2023-06-27 at 6 11 35 pm](https://github.com/AussieKing/eCommerce/assets/126050763/16ba2171-3de2-471b-9163-259c61dd0762)
 
 
 
-  
   
   ## Walk-through video
   
